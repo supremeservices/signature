@@ -1,0 +1,213 @@
+On Error Resume Next
+
+Set objSysInfo = CreateObject("ADSystemInfo")
+strUser = objSysInfo.UserName
+strUser2 = Trim(Split(strUser, ",")(1))
+Set objUser = GetObject("LDAP://" & strUser)
+Select Case strUser2
+	Case "OU=Admins"
+		strPhone = "(985)851-7465"
+		strAddress = "204 Industrial Avenue C"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=IT"
+		strPhone = "(985)655-3038"
+		strAddress = "204 Industrial Avenue C"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Coil"
+		strPhone = "(337)252-4545"
+		strAddress = "105 Mayor Charles Langlinais Lane "
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=BRU-COIL"
+		strPhone = "(337)252-4545"
+		strAddress = "105 Mayor Charles Langlinais Lane "
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Houma"
+		strPhone = "(985)851-7465"
+		strAddress = "204 Industrial Avenue C"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Houma-Concentric"
+		strPhone = "(985)851-0306"
+		strAddress = "3529 Taxi Road"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=HMA-CONC"
+		strPhone = "(985)851-0306"
+		strAddress = "3529 Taxi Road"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Houston"
+		strPhone = "(713)715-1931"
+		strAddress = "11111 Wilcrest Green"
+		strLocation = "Houston, TX 77042"
+		strWebpage = "www.supremeservices.com"		
+	Case "OU=Lafayette"
+		strPhone = "(337)364-9956"
+		strAddress = "3507 Captain Cade Road"
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=BRU-RENT"
+		strPhone = "(337)364-9956"
+		strAddress = "3507 Captain Cade Road"
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Midland"
+		strPhone = "(432)279-1547"
+		strAddress = "12912 Hwy 191 #9.5"
+		strLocation = "Midland, TX 79707"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=MIDLAND-RENT"
+		strPhone = "(432)279-1547"
+		strAddress = "12912 Hwy 191 #9.5"
+		strLocation = "Midland, TX 79707"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Refugio"
+		strPhone = "(361)526-2221"
+		strAddress = "1109 O'Brien Rd"
+		strLocation = "Refugio, TX 78377"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=REF-SERV"
+		strPhone = "(361)526-2221"
+		strAddress = "1109 O'Brien Rd"
+		strLocation = "Refugio, TX 78377"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Services"
+		strPhone = "(985)851-7465"
+		strAddress = "204 Industrial Avenue C"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=New Iberia"
+		strPhone = "(337)365-0333"
+		strAddress = "6203 West Highway 90"
+		strLocation = "New Iberia, LA 70560"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=NIC-CONC"
+		strPhone = "(337)365-0333"
+		strAddress = "6203 West Highway 90"
+		strLocation = "New Iberia, LA 70560"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=NIC-FAST"
+		strPhone = "(337)365-0333"
+		strAddress = "6203 West Highway 90"
+		strLocation = "New Iberia, LA 70560"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Harvey"
+		strPhone = "(504)362-5558"
+		strAddress = "1209 Peters Rd"
+		strLocation = "Harvey, LA 70058"
+		strWebpage = "www.supremeservices.com"
+	Case "OU=Stim"
+		strPhone = "(337)606-0165"
+		strAddress = "3507 Captain Cade Road"
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.stimservices.com"
+	Case "OU=BRU-STIM"
+		strPhone = "(337)606-0165"
+		strAddress = "3507 Captain Cade Road"
+		strLocation = "Broussard, LA 70518"
+		strWebpage = "www.stimservices.com"
+	Case Else
+		strPhone = "(985)851-7465"
+		strAddress = "204 Industrial Avenue C"
+		strLocation = "Houma, LA 70363"
+		strWebpage = "www.supremeservices.com"
+End Select
+strCompany = "Supreme Services"
+strSeperator = "________________________________________________________________________________"
+strName = objUser.FullName
+strTitle = objUser.Title
+strMobile = objUser.mobile
+strDID = objUser.homephone
+strDisclaimerHeader = "PRIVILEGED AND CONFIDENTIAL COMMUNICATION"
+strDisclaimer = "This electronic transmission and any documents attached hereto may contain confidential and/or legally privileged information. The information is intended only for use by the recipient named above. If you have received this electronic message in error please notify the sender and delete the electronic message. Any disclosure, copying, distribution, or use of the contents of information received in error or otherwise is strictly prohibited."
+
+Set objWord = CreateObject("Word.Application")
+
+Set objDoc = objWord.Documents.Add()
+Set objSelection = objWord.Selection
+objSelection.Style = "No Spacing"
+
+Set objEmailOptions = objWord.EmailOptions
+Set objSignatureObject = objEmailOptions.EmailSignature
+
+Set objSignatureEntries = objSignatureObject.EmailSignatureEntries
+
+' Beginning of signature block
+
+'Display Name
+objSelection.TypeText strSeperator
+objSelection.TypeParagraph()
+objSelection.Font.Name = "Georgia"
+objSelection.TypeParagraph()
+objSelection.Font.Bold = True
+objSelection.Font.Size = "12"
+objSelection.TypeText strName
+
+objSelection.TypeParagraph()
+objSelection.Font.Size = "10"
+objSelection.TypeText strTitle
+objSelection.TypeParagraph()
+objSelection.TypeText strCompany
+objSelection.Font.Bold = False
+objSelection.Font.Name = "Arial"
+objSelection.TypeParagraph()
+objSelection.TypeText strAddress
+objSelection.TypeParagraph()
+objSelection.TypeText strLocation
+
+
+if strPhone = "" Then 
+    'No Telephone Number under General in AD
+Else
+objSelection.TypeParagraph()
+objSelection.TypeText "Office: " + strPhone
+end if
+
+if strMobile = "" Then 
+    'No Mobile Phone under Telephones in AD
+Else
+objSelection.TypeParagraph()
+objSelection.TypeText "Mobile: " + strMobile
+end if
+
+if strDID = "" Then 
+    'No Home Phone Number under Telephones in AD
+Else
+objSelection.TypeParagraph()
+objSelection.TypeText "Direct: " + strDID
+end if
+
+objSelection.TypeParagraph()
+Set objLink = objSelection.Hyperlinks.Add(objSelection.Range, strWebpage)
+objLink.Range.Font.Name = "Arial"
+objLink.Range.Font.Size = "10"
+objLink.Range.Font.Color = RGB(0,0,255)
+objSelection.TypeParagraph()
+objSelection.TypeParagraph()
+objSelection.Font.Name = "Georgia"
+objSelection.Font.Underline = true
+objSelection.Font.Bold = True
+objSelection.Font.Color = RGB(0,0,0)
+objSelection.TypeText strDisclaimerHeader
+objSelection.TypeParagraph()
+objSelection.Font.Underline = false
+objSelection.Font.Bold = False
+objSelection.Font.Color = RGB(0,50,145)
+objSelection.TypeText strDisclaimer
+
+
+
+' End of signature block
+
+Set objSelection = objDoc.Range()
+
+objSignatureEntries.Add "Supreme", objSelection
+objSignatureObject.NewMessageSignature = "Supreme"
+objSignatureObject.ReplyMessageSignature = "Supreme"
+
+objDoc.Saved = True
+objWord.Quit
